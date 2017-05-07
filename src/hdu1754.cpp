@@ -105,4 +105,4 @@ int main(){
 	while (~scanf("%d%d",&n,&m))
 	Init(),Solve();
 	return 0;
-}
+}  
