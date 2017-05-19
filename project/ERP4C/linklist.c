@@ -1,4 +1,4 @@
-/*
+﻿/*
 General Linklist Library.
 Author czfshine (https://github.com/czfshine)
 Date :2017-05-10 11:10

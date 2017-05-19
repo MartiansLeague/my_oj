@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 Text User Interface (TUI)
 Author czfshine (https://github.com/czfshine)
 Date :2017-05-10 11:10
@@ -6,53 +6,53 @@ Langage :ANSI C
 Listen :MIT
 Description:
 The user interface in console.
-ÎÄ±¾ÓÃ»§½çÃæ£¨Text User Interface£©¡£
-°üÀ¨ÆÁÄ»£¬ÌáĞÑ£¬ÊäÈë£¬Êä³öµÈº¯Êı¡£
+æ–‡æœ¬ç”¨æˆ·ç•Œé¢ï¼ˆText User Interfaceï¼‰ã€‚
+åŒ…æ‹¬å±å¹•ï¼Œæé†’ï¼Œè¾“å…¥ï¼Œè¾“å‡ºç­‰å‡½æ•°ã€‚
 */
 #include "tui.h"
 
-/*°æ±¾Ğ¡Ğò*/
+/*ç‰ˆæœ¬å°åº*/
 int buildnum[] = {
 	#include "BUILDNUM"
 };
 
-/*°æ±¾ºÅ*/
+/*ç‰ˆæœ¬å·*/
 char version[] = "dev 1.0.1";
 
-/*****************ÊäÈë**********************/
+/*****************è¾“å…¥**********************/
 int WantNum() {
-	/*Êı×ÖÊäÈë*/
+	/*æ•°å­—è¾“å…¥*/
 	/*note: The input num must be > 0*/
-	/*ÊäÈëµÄÊı×Ö±ØĞëÎª×ÔÈ»Êı£¬·µ»ØµÄ´íÎóÂëÎª¸º*/
+	/*è¾“å…¥çš„æ•°å­—å¿…é¡»ä¸ºè‡ªç„¶æ•°ï¼Œè¿”å›çš„é”™è¯¯ç ä¸ºè´Ÿ*/
 	int res = 0;
 	char ch,flag = 0;
 	while ((ch = getchar()) != '\n') {
 		if (isdigit(ch)) {
 			res = res * 10 + ch - '0';
 			if (res < 0) {
-				/*Òç³ö*/
+				/*æº¢å‡º*/
 				InputClean();
 				return WANTLONGERROR;
 			}
 			flag = 1;
 		}
 		else {
-			/*²»Ö§³ÖµÄ×Ö·ûÀàĞÍ[^0-9]*/
+			/*ä¸æ”¯æŒçš„å­—ç¬¦ç±»å‹[^0-9]*/
 			InputClean();
 			return WANTTYPEERROR;
 		}
 	}
 	if (flag)  return res;
-	else  return WANTNULLERROR;/*Î´ÊäÈë*/
+	else  return WANTNULLERROR;/*æœªè¾“å…¥*/
 }
 
 char * WantString() {
-	/*ÊäÈë×Ö·û´®*/
-	/*ÓÃ¾²Ì¬ÀàĞÍ·ÀÖ¹ÄÚ´æĞ¹Â©*/
-	/*·ÀÖ¹»º³åÇøÒç³ö*/
+	/*è¾“å…¥å­—ç¬¦ä¸²*/
+	/*ç”¨é™æ€ç±»å‹é˜²æ­¢å†…å­˜æ³„æ¼*/
+	/*é˜²æ­¢ç¼“å†²åŒºæº¢å‡º*/
 	static char * a = NULL;
 	if (a == NULL)
-		/*ÒªÔÚ¶ÑÄÚ·ÖÅä¿Õ¼ä¶ø²»ÄÜÔÚÕ»ÀïÃæ·ÖÅä£¬·ÀÖ¹±»¸²Ğ´*/
+		/*è¦åœ¨å †å†…åˆ†é…ç©ºé—´è€Œä¸èƒ½åœ¨æ ˆé‡Œé¢åˆ†é…ï¼Œé˜²æ­¢è¢«è¦†å†™*/
 		a = (char *)malloc(MAXSTRINGLEN+2);
 
 	char ch;
@@ -60,7 +60,7 @@ char * WantString() {
 	while ((ch = getchar()) != '\n') {
 		a[i++] = ch;
 		if (i >= MAXSTRINGLEN-2) {
-			/*³¬¹ı½çÏŞµÄ»°£¬½«¶àÓàµÄÊäÈë¶ªÆú£¬·ÀÖ¹³ÌĞò¶Î±»´Û¸Ä*/
+			/*è¶…è¿‡ç•Œé™çš„è¯ï¼Œå°†å¤šä½™çš„è¾“å…¥ä¸¢å¼ƒï¼Œé˜²æ­¢ç¨‹åºæ®µè¢«ç¯¡æ”¹*/
 			InputClean();
 			break;
 		}
@@ -70,7 +70,7 @@ char * WantString() {
 }
 
 char * WantName() {
-	/*ÊäÈëÉÌÆ·Ãû*/
+	/*è¾“å…¥å•†å“å*/
 	printf("Please input the good's name:");
 	return WantString();
 
@@ -79,7 +79,7 @@ char * WantName() {
 int WantId() {
 	printf("Please input the good's id:");
 
-	/*Ä¬ÈÏÎª¸º£¬ËµÃ÷Î´ÕıÈ·ÊäÈë*/
+	/*é»˜è®¤ä¸ºè´Ÿï¼Œè¯´æ˜æœªæ­£ç¡®è¾“å…¥*/
 	int id = -1;
 
 	while (id < 0) {
@@ -100,7 +100,7 @@ int WantId() {
 		}
 
 	}
-	/*Ö±µ½idÎªÕı²Å·µ»Ø*/
+	/*ç›´åˆ°idä¸ºæ­£æ‰è¿”å›*/
 
 	return id;
 }
@@ -132,12 +132,12 @@ int WantCount() {
 }
 
 void WantEnter() {
-	/*ÔİÍ£½ø³Ì£¬µÈ´ıÓÃ»§·´À¡*/
+	/*æš‚åœè¿›ç¨‹ï¼Œç­‰å¾…ç”¨æˆ·åé¦ˆ*/
 	puts("Push Enter to contuine.");
 	InputClean();
 }
 
-/********ÀàĞÍ¼ì²é******************/
+/********ç±»å‹æ£€æŸ¥******************/
 char * TYPENAME[] = {
 	"number",
 	"string"

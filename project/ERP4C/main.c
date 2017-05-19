@@ -1,4 +1,4 @@
-/*
+﻿/*
 THE ERP SYSTEM FOR C (ERP4C)
 Author czfshine (https://github.com/czfshine)
 Date :2017-05-10 11:10
@@ -352,6 +352,7 @@ int ListenMainKey() {
 
 int main(int argn, char * argv[]) {
 	Init();
+	getchar();
 
 	WithDebug({
 		ToMainScreen();

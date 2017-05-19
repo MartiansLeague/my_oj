@@ -1,27 +1,27 @@
-/*
+ï»¿/*
 Debug Library.
 Author czfshine (https://github.com/czfshine)
 Date :2017-05-18 21:12
 Langage :ANSI C
 Listen :MIT
 Description:
-µ÷ÊÔ¿â¡£
+è°ƒè¯•åº“ã€‚
 */
 
-/*ÔÚ¿ª·¢±àÒëÊ±°ÑLOCALºê´ò¿ª£¬½øÈëµ÷ÊÔÄ£Ê½*/
+/*åœ¨å¼€å‘ç¼–è¯‘æ—¶æŠŠLOCALå®æ‰“å¼€ï¼Œè¿›å…¥è°ƒè¯•æ¨¡å¼*/
 #ifndef LOCAL
 int DEBUG = 0;
 #else
 int DEBUG = 1;
 #endif 
 
-/*ÔÚÎÄ¼şÊäÈëÊä³ö»·¾³ÏÂ²âÊÔ£¬È»ºó½«¿ØÖÆÈ¨½»ÓÉÓÃ»§*/
+/*åœ¨æ–‡ä»¶è¾“å…¥è¾“å‡ºç¯å¢ƒä¸‹æµ‹è¯•ï¼Œç„¶åå°†æ§åˆ¶æƒäº¤ç”±ç”¨æˆ·*/
 #ifdef __linux__ || __linux
 #define WithDebug(code) code;
 #else
 #define WithDebug(code) do{\
 	if(DEBUG){\
-		/*±£ÁôÔ­Ê¼stdout£¬²»È»Êä³ö»áÂÒÂë*/\
+		/*ä¿ç•™åŸå§‹stdoutï¼Œä¸ç„¶è¾“å‡ºä¼šä¹±ç */\
 		int oldstdout = _dup(1);\
 		freopen("testin1.txt", "r", stdin);\
 		freopen("testout1.txt", "w", stdout);\
