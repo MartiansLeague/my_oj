@@ -3,3 +3,13 @@ src/test.c
 src/log
 *.html
 data/
+*.o
+test.c
+*.gch
+project/Library/Library.layout
+*.o
+*.dat
+project/ERP4C/goods.dat
+project/ERP4C/testout1.txt
+project/ERP4C/testin1.txt
+*.diagsession

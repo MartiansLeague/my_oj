@@ -36,46 +36,75 @@ const double FINF = 1e18;
 #define print(x) cout<<(x)<<endl;
 #define IOS ios::sync_with_stdio(0);cin.tie(0);
 
-char s[1000005],t[10005];    
-int p[10005];    
+
+
+int p[50]={0};
 
 void Init(){
-	scanf("%s%s",t,s);
+
+	p[2]=p[3]=p[5]=p[7]=p[11]=p[13]=p[17]=p[23]=p[29]=p[31]=1;
+
 
 	return ;
 }
 
-#define diff(str,tem,i,j) while(j&&str[i]!=tem[j])j=p[j];
+int a[30]={0};
+int count1;
+int m;
+int add(int cur,int i){
 
+	int sum=0;
+
+	REP(j,0,m-2){
+		sum+=a[cur-j];
+	}
+	sum+=i;
+	if(p[sum]==1){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+
+}
+int n;
+
+int dfs(int cur){
+	REP(i,0,9){
+		//print(i);
+		if(add(cur,i)){
+			print(i);
+			if(cur==n+5){
+				REP(j,0,20){
+					cout<<a[i]<<" ";
+				}
+				cout<<endl;
+				count1++;
+			}else{
+				a[cur++]=i;
+				dfs(cur);
+			}
+			
+		}
+	}
+}
 void Solve(){
-	
-	int n=strlen(s);
-    int m=strlen(t);
-    int i,j,ans=0;
-    p[0]=p[1]=0;
-    REP(i,1,m-1){
-        j=p[i];
-        diff(t,t,i,j)
-        p[i+1]=t[i]==t[j]?j+1:0;
-    }
-    j=0;
-    REP(i,0,n){
-        diff(s,t,i,j)
-        if(s[i]==t[j])j++;
-        if(j==m)ans++;
-    }
-    printf("%d\n",ans);
+	scanf("%d%d",&n,&m);
+	memset(a,0,sizeof(a));
+	count1=0;
+	dfs(6);
+	cout<<count1<<endl;
 	return ;
 }
 
 int main(){
 #ifdef LOCAL
-	freopen("hdu1686.in","r",stdin);
+	freopen("uoj18025.in","r",stdin);
 #endif
 
-	int T;
-    scanf("%d",&T);
-    while(T--)
+ 	int t;
+ 	scanf("%d",&t);
+ 	while(t--)
 	Init(),Solve();
 	return 0;
 }
