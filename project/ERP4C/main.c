@@ -352,7 +352,6 @@ int ListenMainKey() {
 
 int main(int argn, char * argv[]) {
 	Init();
-	getchar();
 
 	WithDebug({
 		ToMainScreen();
