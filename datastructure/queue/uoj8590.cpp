@@ -18,24 +18,18 @@ int main()
 
     while(n--)
     {
-
         int intime,outt;
-
         cin>>intime>>outt;
         users.push(make_pair(intime,outt));
     }
 
     int now=0;
-
     int sum=0;
 
     while(!users.empty())
     {
-
-
         switch(now>=users.front().first)
         {
-
         case true:
             sum+=(now-users.front().first);
             now+=users.front().second;
@@ -44,10 +38,7 @@ int main()
         case false:
             now=users.front().first;
         }
-
     }
-
-
     printf("%.2f",(float) sum/(float)nn);
 
 }
