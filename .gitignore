@@ -16,3 +16,4 @@ project/ERP4C/testin1.txt
 ..bfg-report/
 *.depend
 datastructure/stack/expression/expression.layout
+*.layout
