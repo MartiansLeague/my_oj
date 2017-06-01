@@ -46,127 +46,135 @@
 18 20 30 40 50 56 60 90
 40 20 60 18 30 50 90 56
 
-
-作者 yqm
-提交
 */
 
 
-#include "stdio.h"
-#include "malloc.h"
-#define TRUE 1
-#define FALSE 0
+#include <cstdio>
+#include <malloc.h>
+#include <iostream>
+
 #define OK  1
 #define ERROR  0
 #define INFEASIBLE -1
 #define OVERFLOW -2
-typedef int  Status;
 
-typedef char  ElemType;
-typedef struct BiTNode
+typedef int  Status;
+typedef int  ElemType;
+
+
+using namespace std;
+
+
+//core
+struct BSTree
 {
     ElemType data;
-    struct BiTNode *lchild,*rchild;//左右孩子指针
-} BiTNode,*BiTree;
+    struct BSTree *lchild,*rchild;//左右孩子指针
 
-Status CreateBiTree(BiTree &T)    // 算法6.4
-{
-    // 按先序次序输入二叉树中结点的值（一个字符），’#’字符表示空树，
-    // 构造二叉链表表示的二叉树T。
-    char ch;
-    scanf("%c",&ch);
-    if (ch=='#') T = NULL;
-    else
+    BSTree()
     {
-        if (!(T = (BiTNode *)malloc(sizeof(BiTNode)))) return ERROR;
-        T->data=ch; // 生成根结点
-        CreateBiTree(T->lchild)  ;  // 构造左子树
-        CreateBiTree(T->rchild)  ;   // 构造右子树
+        rchild=lchild=nullptr;
     }
-    return OK;
-} // CreateBiTree
-
-
-Status PrintElement( ElemType e )    // 输出元素e的值
-{
-    printf("%c", e );
-    return OK;
-}// PrintElement
-
-
-Status PreOrderTraverse( BiTree T, Status(*Visit)(ElemType) )
-{
-    // 前序遍历二叉树T的递归算法，对每个数据元素调用函数Visit。
-    //补全代码,可用多个语句
-
-    if(T)
+    void PrintElement()
     {
-
-        if(Visit(T->data))
-            if(PreOrderTraverse(T->lchild,Visit))
-                if(PreOrderTraverse(T->rchild,Visit))
-                    return OK;
-        return ERROR;
-
-
+        cout<<data<<" ";
     }
-    return OK;
-
-} // PreOrderTraverse
-
-Status InOrderTraverse( BiTree T, Status(*Visit)(ElemType) )
-{
-    // 中序遍历二叉树T的递归算法，对每个数据元素调用函数Visit。
-    //补全代码,可用多个语句
-
-    if(T)
+    Status PreOrderTraverse()
     {
-        if(InOrderTraverse(T->lchild,Visit))
-            if(Visit(T->data))
+        PrintElement();
+        lchild!=nullptr && lchild->PreOrderTraverse();
+        rchild!=nullptr && rchild->PreOrderTraverse();
+        return OK;
+    }
+    Status Leave()
+    {
+        if(lchild == nullptr  && rchild ==nullptr)
+            return true;
+        return false;
+    }
+    Status Search(ElemType t,BSTree * &p )
+    {   p=this;
+        if(data==t) {  return true;}
+        if(t<data &&  lchild !=nullptr) return lchild->Search(t,p);
+        if(t>data &&  rchild !=nullptr) return rchild->Search(t,p);
+        return false;
+    }
+    Status Insert(ElemType k){
+        BSTree *p;
+        if(!Search(k,p)){
+            BSTree * s=(BSTree *) malloc(sizeof (BSTree));
+            s->data=k; s->lchild=s->rchild=nullptr;
 
-                if(InOrderTraverse(T->rchild,Visit))
-                    return OK;
-        return ERROR;
-
+            if(k<p->data) p->lchild=s;
+            else p->rchild=s;
+            return true;
+        }
+        return false;
 
     }
-    return OK;
+    Status InOrderTraverse(){
 
-
-
-} // InOrderTraverse
-
-Status PostOrderTraverse( BiTree T, Status(*Visit)(ElemType) )
-{
-    // 后序遍历二叉树T的递归算法，对每个数据元素调用函数Visit。
-    //补全代码,可用多个语句
-    if(T)
-    {
-        if(PostOrderTraverse(T->lchild,Visit))
-             if(PostOrderTraverse(T->rchild,Visit))
-            if(Visit(T->data))
-
-
-                    return OK;
-        return ERROR;
-
-
+        lchild!=nullptr && lchild->PreOrderTraverse();
+        PrintElement();
+        rchild!=nullptr && rchild->PreOrderTraverse();
+        return OK;
     }
-    return OK;
+    Status PostOrderTraverse( ){
 
-} // PostOrderTraverse
+        lchild!=nullptr && lchild->PreOrderTraverse();
+        rchild!=nullptr && rchild->PreOrderTraverse();
+        PrintElement();
+        return OK;
+    }
+};
 
+class BST{
+
+private:
+    BSTree T;
+    int count=0;
+public:
+    void insert(ElemType k){
+        if(!count){
+            T.data=k;
+        }else{
+            T.Insert(k);
+        }
+        count++;
+    }
+
+    void PreOrder(){
+        T.PreOrderTraverse();
+        cout<<endl;
+    }
+    void PostOrder(){
+        T.PostOrderTraverse();
+        cout<<endl;
+    }
+    void InOrder(){
+        T.InOrderTraverse();
+        cout<<endl;
+    }
+};
 
 
 int main()   //主函数
 {
-    BiTree T;
-    CreateBiTree(T);
-    PreOrderTraverse(T,PrintElement);
-    printf("\n");
-    InOrderTraverse(T,PrintElement);
-    printf("\n");
-    PostOrderTraverse(T,PrintElement);
-    printf("\n");
-    //补充代码
+    BST T;
+
+    int n;
+    cin>>n;
+    int t;
+    while(n--){
+        cin>>t;
+        if(t==18){
+            1+1;
+        }
+        T.insert(t);
+        T.PreOrder();
+        T.InOrder();
+        T.PostOrder();
+    }
+
+
 }//main
