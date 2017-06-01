@@ -18,28 +18,38 @@ void print(int *nums,int len){
     cout<<endl;
 }
 
-int min(int *num,int  s ,int e){
 
-    int p=s;
+void fit(int * num,int s,int end){
 
-    int mi=num[s];
+    int t=num[s];
 
-    for (int i=s+1;i<=e;i++){
+    for(int j = 2* s;j<=end;j*=2){
 
-        if(num[i]<mi){
-            p=i;
-            mi=num[i];
+        if(j<end && num[j]<num[j+1]){
+            j++;
         }
+
+        if(t>=num[j]){
+            break;
+        }
+
+        num[s]=num[j];
+        s=j;
+
     }
-    return p;
-
+    num[s]=t;
 }
-void SelectSort(int * num,int len){
+void HeapSort(int * num,int len){
 
-    for(int i=1;i<len;++i){
-        int pos=min(num,i,len);
-        swap(num[i],num[pos]);
+    for(int i =len/2; i>0;i--){
+
+        fit(num,i,len);
+    }
     print(num,len);
+    for(int i=len;i>1;--i){
+        swap(num[1],num[i]);
+        fit(num,1,i-1);
+        print(num,len);
     }
 
 }
@@ -65,7 +75,7 @@ int main(){
         l=l/2;
     }
 
-    SelectSort(nums,n);
+    HeapSort(nums,n);
     return 0;
 
 }
