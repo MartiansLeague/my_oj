@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define ll long long 
+#define ll long long
 #define lson l,mid,id<<1
 #define rson mid+1,r,id<<1|1
 
@@ -33,78 +33,79 @@ const double FINF = 1e18;
 
 #define REP(i,j,k) for(int i =(j);i<=(k);i++)
 #define REPD(i,j,k) for(int i =(j);i>=(k);i--)
-#define print(x) cout<<(x)<<endl;
+
 #define IOS ios::sync_with_stdio(0);cin.tie(0);
 
 
-
-int p[50]={0};
-
-void Init(){
-
-	p[2]=p[3]=p[5]=p[7]=p[11]=p[13]=p[17]=p[23]=p[29]=p[31]=1;
-
-
-	return ;
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+int ans=0;
+int prime[45];
+int store[100];
+int n,m;
+void is_prime()
+{
+    int k;
+    int i;
+    prime[0]=prime[1]=0;
+    for(m=2;m<45;m++)//让m除以2~根号m，如果不能被其中任何一个数整除。则m为素数，否则为非素数。
+    {
+        k=sqrt(m);
+        for(i=2;i<=k;i++)
+        if(m%i==0)
+        break;
+        if(i>k)prime[m]=1;
+        else
+        prime[m]=0;
+    }
 }
 
-int a[30]={0};
-int count1;
-int m;
-int add(int cur,int i){
+void print(){
+    for(int i=0;i<20;i++){
+        printf("%d ",store[i]);
+    }
+    printf("\n");
+}
+void success(int t)
+{
+    //printf("A:%d %d\n",n,m);
+    int i;
+    int total=0;
+    if(t>n)//如果到达n位说明构造成功,一直满足条件才会进入t>n
+    {
+        ans++;
+        //print();
+        //printf("enter\n");
+        return;
+    }
+    if(t>=m)
+    for(i=t-1;i>t-m;i--)//范围是1~m-1
+    total+=store[i];//计算前 m-1位的值
+    for(i=0;i<=9;i++)//每一位可以使0~9的任意数
+    {
+        if(prime[total+i]|| t<m) //如果加上这一位是一个质数才向下遍历
+        {
+            store[t]=i;
+            success(t+1);
+            //printf("C\n");
+        }
+    }
 
-	int sum=0;
-
-	REP(j,0,m-2){
-		sum+=a[cur-j];
-	}
-	sum+=i;
-	if(p[sum]==1){
-		return 1;
-	}
-	else{
-		return 0;
-	}
 
 }
-int n;
-
-int dfs(int cur){
-	REP(i,0,9){
-		//print(i);
-		if(add(cur,i)){
-			print(i);
-			if(cur==n+5){
-				REP(j,0,20){
-					cout<<a[i]<<" ";
-				}
-				cout<<endl;
-				count1++;
-			}else{
-				a[cur++]=i;
-				dfs(cur);
-			}
-			
-		}
-	}
-}
-void Solve(){
-	scanf("%d%d",&n,&m);
-	memset(a,0,sizeof(a));
-	count1=0;
-	dfs(6);
-	cout<<count1<<endl;
-	return ;
-}
-
-int main(){
-#ifdef LOCAL
-	freopen("uoj18025.in","r",stdin);
-#endif
-
- 	int t;
- 	scanf("%d",&t);
- 	while(t--)
-	Init(),Solve();
-	return 0;
+int main()
+{
+    int k;
+    int i;
+    is_prime();
+    //prime[0]=1;
+    scanf("%d",&k);
+    for(int i=0;i<k;i++)
+    {
+        ans=0;
+        scanf("%d %d",&n,&m);
+        success(1);//从第一位开始枚举，深度优先搜索
+        printf("%d\n",ans);
+    }
 }
