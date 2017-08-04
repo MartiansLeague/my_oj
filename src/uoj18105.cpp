@@ -65,7 +65,7 @@ Tom
 
 using namespace std;
 
-#define ll long long 
+#define ll long long
 #define lson l,mid,id<<1
 #define rson mid+1,r,id<<1|1
 
@@ -99,7 +99,7 @@ void Init(){
 }
 
 void Solve(){
-	
+
 	int ttime,lv;
 	string name;
 
@@ -108,7 +108,7 @@ void Solve(){
 
 	while(usernum--){
         cin>>ttime>>lv>>name;//最好不要用cin，这题差一点就超时2333333333
-        
+
         while(ttime-p>0){
         	//找出能被叫号的弹出来
         	//也就是时间满足条件的
@@ -143,7 +143,7 @@ int main(){
 
 	/*这个不用管，你要在编译器加上-DLOCAL 才会从文件读入，所以本地可以直接从文件读入，到oj上就不会了*/
 #ifdef LOCAL
-	freopen("uoj18105.in","r",stdin);
+	//freopen("uoj18105.in","r",stdin);
 #endif
 
 

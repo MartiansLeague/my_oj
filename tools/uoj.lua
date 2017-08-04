@@ -46,13 +46,14 @@ function facepunch.http.get( URL, session )
 	-- r is retcontent,c is retcode,cookie just cookie
 	return r, c, cookie
 end
-for i=1000,2000 do
+for i=1000,9999 do
 	infile=io.open("uoj"..i..".html","w")
-r,c,cookie=facepunch.http.get( "http://acm.scau.edu.cn:8002/uoj/common_problem_view_PUBLIC.html?identity=d58fb98d3a0ba5531d48aa3f5b33a510&problemId="..i,
- {cookie="JSESSIONID=63AF67ECACFF7F3E7158A291EB0FE191; cotree=1.2; cstree=64;"} )
+r,c,cookie=facepunch.http.get( "http://acm.scau.edu.cn:8000/uoj/common_problem_view_PUBLIC.html?identity=55fb83200b34946da0c72b7a9f791950&problemId="..i,
+ {cookie="JSESSIONID=F30EDD7CCB82FEA5714AC1034BA2742C; cotree=1.2; cstree=64;"} )
 infile:write(r)
 print(i)
 infile:close()
 print(c)
+os.execute("ping 127.0.0.1 -n 3 -w 1000 > nul")
 end
 
