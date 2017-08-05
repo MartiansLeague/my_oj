@@ -1,0 +1,7 @@
+doc/
+.vs/
+Debug/
+*.exe
+goods.dat
+*.diagsession
+testout1.txt
