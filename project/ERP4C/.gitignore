@@ -5,3 +5,4 @@ Debug/
 goods.dat
 *.diagsession
 testout1.txt
+*.log
