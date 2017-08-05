@@ -1,3 +1,6 @@
 [submodule "tools/luagy"]
 	path = tools/luagy
 	url = https://github.com/czfshine/luagy.git
+[submodule "project\\NSTL\\gtest"]
+	path = project\\NSTL\\gtest
+	url = https://github.com/google/googletest.git
