@@ -286,3 +286,11 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+# Linux output
+*.a
+
+# Unit Test output
+
+NSTL_unittest
+NSTL_unittest.exe
