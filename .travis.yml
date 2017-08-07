@@ -1,8 +1,8 @@
 language: cpp
 compiler:
   - gcc
-
+cache: ccache
 script:
   - cd ./project/NSTL/
-  - make
+  - make -j4
   - ./NSTL_unittest
