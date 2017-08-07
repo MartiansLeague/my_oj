@@ -43,8 +43,8 @@ OS_NAME = $(shell uname -o)
 
 #TODO:IN WINDOW
 clean :
-	- rm -f $(TESTS) gtest.a gtest_main.a *.o
-	  del $(TESTS).exe
+	- rm -f $(TESTS)  *.o *.makefile *.a *.temp
+	- del $(TESTS).exe
 	- del *.a
 	- del *.o
 
@@ -76,8 +76,16 @@ gtest_main.a : gtest-all.o gtest_main.o
 # gtest_main.a, depending on whether it defines its own main()
 # function.
 
-unittest.o : $(USER_DIR)/unittest.cc  $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/unittest.cc
 
-NSTL_unittest :unittest.o gtest_main.a
+OBJS = unittest.o
+%.o : $(USER_DIR)/%.cc
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $<
+
+NSTL_unittest :$(OBJS) gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+
+%.makefile :$(USER_DIR)/%.cc 
+	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) -MM $< > $@.temp
+	sed  "s,\($*\)\.o[ :]*,\1.o $@ : ,g" < $@.temp > $@
+
+-include unittest.makefile

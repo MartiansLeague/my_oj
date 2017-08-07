@@ -294,3 +294,5 @@ __pycache__/
 
 NSTL_unittest
 NSTL_unittest.exe
+*.makefile
+output.txt
