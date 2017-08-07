@@ -39,9 +39,14 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 
 all : $(TESTS)
 
+OS_NAME = $(shell uname -o)
+
 #TODO:IN WINDOW
 clean :
-	rm -f $(TESTS) gtest.a gtest_main.a *.o
+	- rm -f $(TESTS) gtest.a gtest_main.a *.o
+	  del $(TESTS).exe
+	- del *.a
+	- del *.o
 
 # Builds gtest.a and gtest_main.a.
 
