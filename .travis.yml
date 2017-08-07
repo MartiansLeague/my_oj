@@ -1,0 +1,11 @@
+language: cpp
+compiler:
+  - gcc
+
+install:
+  - git submodule init
+  - git submodule update
+script:
+  - cd ./project/NSTL/
+  - make
+  - ./NSTL_unittest
