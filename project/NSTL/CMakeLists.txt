@@ -1,44 +1,7 @@
-########################################################################
-# CMake build script for Google Test.
-#
-# To run the tests for Google Test itself on Linux, use 'make test' or
-# ctest.  You can select which tests to run using 'ctest -R regex'.
-# For more options, run 'ctest --help'.
 cmake_minimum_required(VERSION 2.6.4)
-
-project( NSTL )
-
-
-option(BUILD_GTEST "Builds the googletest subproject" OFF)
-
-#Note that googlemock target already builds googletest
-option(BUILD_GMOCK "Builds the googlemock subproject" ON)
-
-
-# ##########OPTIONS######################
-# BUILD_SHARED_LIBS is a standard CMake variable, but we declare it here to
-# make it prominent in the GUI.
-option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
-
-# When other libraries are using a shared version of runtime libraries,
-# Google Test also has to use one.
-option(
-  gtest_force_shared_crt
-  "Use shared (DLL) run-time lib even when Google Test is built as static lib."
-  OFF)
-
-option(gtest_build_tests "Build all of gtest's own tests." OFF)
-
-option(gtest_build_samples "Build gtest's sample programs." OFF)
-
-option(gtest_disable_pthreads "Disable uses of pthreads in gtest." OFF)
-
-option(
-  gtest_hide_internal_symbols
-  "Build gtest with internal symbols hidden in shared libraries."
-  OFF)
-
+####################GTEST START#######################################
 set(GTESTDIR gtest/googletest)
+set(CUR ../../)
 # Defines pre_project_set_up_hermetic_build() and set_up_hermetic_build().
 include(${GTESTDIR}/cmake/hermetic_build.cmake OPTIONAL)
 
@@ -46,32 +9,11 @@ if (COMMAND pre_project_set_up_hermetic_build)
   pre_project_set_up_hermetic_build()
 endif()
 
-########################################################################
-#
-# Project-wide settings
-
-# Name of the project.
-#
-# CMake files in this project can refer to the root source directory
-# as ${gtest_SOURCE_DIR} and to the root binary directory as
-# ${gtest_BINARY_DIR}.
-# Language "C" is required for find_package(Threads).
 project(gtest CXX C)
 cmake_minimum_required(VERSION 2.6.4)
 
-if (COMMAND set_up_hermetic_build)
-  set_up_hermetic_build()
-endif()
-
-if (gtest_hide_internal_symbols)
-  set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-  set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
-endif()
-
-# Define helper functions and macros used by Google Test.
 include(${GTESTDIR}/cmake/internal_utils.cmake)
-
-config_compiler_and_linker()  # Defined in internal_utils.cmake.
+config_compiler_and_linker() 
 
 # Where Google Test's .h files can be found.
 include_directories(
@@ -95,10 +37,6 @@ endif()
 #
 # Defines the gtest & gtest_main libraries.  User tests should link
 # with one of them.
-
-# Google Test libraries.  We build them using more strict warnings than what
-# are used for other targets, to ensure that gtest can be compiled by a user
-# aggressive about warnings.
 cxx_library(gtest "${cxx_strict}" ${GTESTDIR}/src/gtest-all.cc)
 cxx_library(gtest_main "${cxx_strict}" ${GTESTDIR}/src/gtest_main.cc)
 target_link_libraries(gtest_main gtest)
@@ -118,13 +56,5 @@ install(TARGETS gtest gtest_main
   DESTINATION lib)
 install(DIRECTORY ${GTESTDIR}/include/gtest
   DESTINATION include)
-
-########################################################################
-#
-# Samples on how to link user tests with gtest or gtest_main.
-#
-# They are not built by default.  To build them, set the
-# gtest_build_samples option to ON.  You can do it by running ccmake
-# or specifying the -Dgtest_build_samples=ON flag when running cmake.
-
-cxx_executable(sample1_unittest ${GTESTDIR}/samples gtest_main ${GTESTDIR}/samples/sample1.cc)
+################GTEST END################################################
+cxx_executable(unittest test gtest_main ./test/unittest.cc)
