@@ -37,7 +37,10 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 
 # House-keeping build targets.
 
-all : $(TESTS)
+all : $(TESTS) 
+	- echo "start"
+	- time 
+	- $(CXX) -v
 
 OS_NAME = $(shell uname -o)
 
