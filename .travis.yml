@@ -128,6 +128,20 @@ matrix:
       compiler: clang
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - george-edison55-precise-backports
+          packages:
+            - cmake-data
+            - cmake
+      env:
+        - MATRIX_EVAL="echo cmake"
+      script:
+        - cd build 
+        - cmake -G "Unix Makefiles" ..\
+        - cmake --build .
 before_install:
     - eval "${MATRIX_EVAL}"
 
