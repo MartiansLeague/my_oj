@@ -297,3 +297,10 @@ NSTL_unittest.exe
 *.makefile
 output.txt
 *.temp
+*.cmake
+CMakeFiles/
+CMakeCache.txt
+gtest/
+*.sln
+*.vcxproj
+*.filters
