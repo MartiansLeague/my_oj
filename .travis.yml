@@ -139,6 +139,7 @@ matrix:
       env:
         - MATRIX_EVAL="echo cmake"
       script:
+        - mkdir build
         - cd build 
         - cmake -G "Unix Makefiles" ..\
         - cmake --build .
