@@ -6,4 +6,5 @@ if (f=="q" or f == "") then
 else
     os.execute("git add .")
     os.execute("git commit -m \""..f.."\"")
+    os.execute("start git push")
 end
