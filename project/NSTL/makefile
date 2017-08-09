@@ -84,7 +84,8 @@ NSTLINCLUDE= include
 vpath %.cc $(USER_DIR)
 vpath %.cc $(USER_DIR)/env
 
-CPPFLAGS += -I $(NSTLINCLUDE)/
+CPPFLAGS += -I $(NSTLINCLUDE)/ 
+CPPFLAGS += -fprofile-arcs -ftest-coverage 
 %.o : $(USER_DIR)/%.cc
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $<
 

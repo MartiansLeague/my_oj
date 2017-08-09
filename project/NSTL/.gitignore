@@ -305,3 +305,5 @@ gtest/
 *.vcxproj
 *.filters
 log.txt
+results/
+app.info
