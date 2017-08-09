@@ -1,5 +1,6 @@
 # my_oj
 [![Build Status](https://travis-ci.org/czfshine/my_oj.svg?branch=master)](https://travis-ci.org/czfshine/my_oj)
+[![Coverage Status](https://coveralls.io/repos/github/czfshine/my_oj/badge.svg?branch=master)](https://coveralls.io/github/czfshine/my_oj?branch=master)
 some oj code
 
 # other
