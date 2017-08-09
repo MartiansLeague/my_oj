@@ -19,3 +19,4 @@ datastructure/stack/expression/expression.layout
 *.layout
 build/
 .vs/
+.vscode/

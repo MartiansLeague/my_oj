@@ -78,15 +78,22 @@ gtest_main.a : gtest-all.o gtest_main.o
 # function.
 
 
-OBJS = unittest.o
+OBJS = unittest.o valstest.o
+
+NSTLINCLUDE= include
+vpath %.cc $(USER_DIR)
+vpath %.cc $(USER_DIR)/env
+
+CPPFLAGS += -I $(NSTLINCLUDE)/
 %.o : $(USER_DIR)/%.cc
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $<
 
-NSTL_unittest :$(OBJS) gtest_main.a
+
+NSTL_unittest : $(OBJS) gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 
 %.makefile :$(USER_DIR)/%.cc 
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) -MM $< > $@.temp
 	sed  "s,\($*\)\.o[ :]*,\1.o $@ : ,g" < $@.temp > $@
 
--include unittest.makefile
+-include ${OBJ:.o=.makefile}
