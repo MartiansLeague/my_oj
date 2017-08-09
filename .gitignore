@@ -20,3 +20,6 @@ datastructure/stack/expression/expression.layout
 build/
 .vs/
 .vscode/
+*.gcda
+*.gcno
+*.gcov

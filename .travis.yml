@@ -147,9 +147,13 @@ matrix:
         - ./unittest
 before_install:
     - eval "${MATRIX_EVAL}"
+    - pip install --user cpp-coveralls
 
 cache: ccache
 script:
   - cd ./project/NSTL/
   - make -j4
   - ./NSTL_unittest
+after_success:
+  - python coveralls.py -e gtest/
+  - coveralls  --verbose  --exclude lib --exclude tests --gcov-options '\-lp'
