@@ -5,9 +5,9 @@
 
 int in=2;
 
-IN_SPACE
+IN_NSTL
 int in=1;
-OUT_SPACE
+OUT_NSTL
 
 TEST(VALS,SPACE) {
   EXPECT_EQ(in,2);
