@@ -7,6 +7,6 @@
 
 #define NSTL_SPACENAME czfshine
 
-#define IN_SPACE namespace NSTL_SPACENAME {
-#define OUT_SPACE }
+#define IN_NSTL namespace NSTL_SPACENAME {
+#define OUT_NSTL }
 #define NSTLSPACE ::NSTL_SPACENAME
